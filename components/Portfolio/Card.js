@@ -4,11 +4,11 @@ import { motion as m, useAnimationControls } from 'framer-motion'
 import Link from 'next/link';
 import { scaleAnimate } from '../../animates';
 
-function Card({data}) {
+function Card({ data }) {
     const [imageSize, setSmageSize] = useState({
         width: 1,
         height: 1
-       });
+    });
     const [onHoverDisplay, setOnHoverDisplay] = useState(false);
     const controls = useAnimationControls();
 
@@ -16,35 +16,35 @@ function Card({data}) {
         onHoverDisplay && controls.start("animate");
         !onHoverDisplay && controls.start("initial");
     }, [onHoverDisplay]);
-    
+
     return (
-        <m.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: .5, delay: .5 }}
-        className="w-full mb-4">
-            <div 
-            onMouseEnter={() => setOnHoverDisplay(true)}
-            onMouseLeave={() => setOnHoverDisplay(false)}
-            className="relative overflow-hidden rounded-lg group cursor-pointer border-[1px] border-gray-300 dark:border-none">
-                <m.div 
-                variants={scaleAnimate}
-                initial="initial"
-                animate={controls}>
+        <m.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: .5, delay: .5 }}
+            className="w-full mb-4">
+            <div
+                onMouseEnter={() => setOnHoverDisplay(true)}
+                onMouseLeave={() => setOnHoverDisplay(false)}
+                className="relative overflow-hidden rounded-lg group cursor-pointer border-[1px] border-gray-300 dark:border-none">
+                <m.div
+                    variants={scaleAnimate}
+                    initial="initial"
+                    animate={controls}>
                     <Image
-                    src={`/api/imageproxy?url=${encodeURIComponent(data.image_url)}`}
-                    layout="responsive"
-                    objectFit="contain"
-                    alt={data.title}
-                    onLoadingComplete={target => {
-                        setSmageSize({
-                            width: target.naturalWidth,
-                            height: target.naturalHeight
-                        });
-                    }}
-                    width={imageSize.width}
-                    height={imageSize.height}
-                    className="w-full"/>
+                        src={data.image_url}
+                        layout="responsive"
+                        objectFit="contain"
+                        alt={data.title}
+                        onLoadingComplete={target => {
+                            setSmageSize({
+                                width: target.naturalWidth,
+                                height: target.naturalHeight
+                            });
+                        }}
+                        width={imageSize.width}
+                        height={imageSize.height}
+                        className="w-full" />
                 </m.div>
                 <div className="hidden group-hover:flex absolute inset-0 bg-black bg-opacity-50 p-2 justify-between items-end w-full text-sm">
                     {data?.demo_url && (
@@ -63,8 +63,8 @@ function Card({data}) {
                 <div className="flex gap-[.5em] flex-1 flex-wrap py-2">
                     {data.technologies.map(technology => (
                         <div
-                        key={technology} 
-                        className="flex items-center gap-1 w-max text-sm bg-primary border-[1px] border-gray-300 dark:border-primary rounded px-1.5 py-0.5 text-white overflow-y-hidden hover:bg-gray-800 cursor-pointer">
+                            key={technology}
+                            className="flex items-center gap-1 w-max text-sm bg-primary border-[1px] border-gray-300 dark:border-primary rounded px-1.5 py-0.5 text-white overflow-y-hidden hover:bg-gray-800 cursor-pointer">
                             <span className="relative top-0.5">{technology}</span>
                         </div>
                     ))}
