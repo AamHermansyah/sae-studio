@@ -1,16 +1,14 @@
 import React from 'react'
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
-import Image from 'next/legacy/image'
 
 function Card({ data }) {
   return (
     <div className="relative flex flex-col bg-white items-center w-full max-w-[300px] p-4 pb-10 rounded-md shadow-lg mt-16">
       <div className="relative w-24 h-24 rounded-full bg-sky-200 -mt-16 overflow-hidden">
-        <Image
+        <img
           src={data.image_url}
           alt={`${data.name} photo profile`}
-          layout="fill"
-          objectFit="cover"
+          className="absolute inset-0 object-cover"
         />
       </div>
       <div className="text-center">

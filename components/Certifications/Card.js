@@ -1,13 +1,8 @@
-import Image from 'next/legacy/image'
 import React, { useEffect, useState } from 'react'
 import { motion as m, useAnimationControls } from 'framer-motion'
 import { borderAnimate, scaleAnimate } from '../../animates';
 
 function Card({ data }) {
-    const [imageSize, setSmageSize] = useState({
-        width: 1,
-        height: 1
-    });
     const [onHoverDisplay, setOnHoverDisplay] = useState(false);
     const controls = useAnimationControls();
 
@@ -29,20 +24,11 @@ function Card({ data }) {
                     variants={scaleAnimate}
                     initial="initial"
                     animate={controls}>
-                    <Image
+                    <img
                         src={data.image_url}
-                        layout="responsive"
-                        objectFit="contain"
                         alt={data.title}
-                        onLoadingComplete={target => {
-                            setSmageSize({
-                                width: target.naturalWidth,
-                                height: target.naturalHeight
-                            });
-                        }}
-                        width={imageSize.width}
-                        height={imageSize.height}
-                        className="w-full" />
+                        className="w-full h-auto"
+                    />
                 </m.div>
             </m.div>
             <div className="mt-2">
